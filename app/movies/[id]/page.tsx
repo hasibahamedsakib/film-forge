@@ -1,66 +1,71 @@
+import AddToWatchlistButton from "@/components/AddToWatchlistButton";
+import MovieCard from "@/components/MovieCard";
+import CastCard from "@/components/movies/CastCard";
+import SectionTitle from "@/components/SectionTitle";
+import { MovieProps, TActor } from "@/types/type";
 import { getMovieCredits } from "@/utils/getMovieCredits";
 import { getMovieDetails } from "@/utils/getMovieDetails";
+import { getMovieRecommendations } from "@/utils/getMovieRecommendations";
 import Image from "next/image";
 
 async function MovieDetails({ params }: { params: { id: string } }) {
   const movieId = params.id;
   const movie = await getMovieDetails(movieId);
   const credits = await getMovieCredits(movieId);
+  const recommendations = await getMovieRecommendations(movieId);
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="md:w-1/3">
+    <div className="bg-secondary bg-banner_bg relative bg-left-top bg-no-repeat px-2 py-5 sm:p-10 lg:p-14 xl:p-20  w-full mx-auto">
+      <div className="flex justify-end">
+        <AddToWatchlistButton movie={movie} />
+      </div>
+      <div className="flex flex-col md:flex-row gap-4 flex-shrink flex-grow">
+        <div className="md:w-[40%]">
           <Image
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            src={
+              movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                : "/default-image.png"
+            }
             alt={movie.title}
-            width={500}
+            width={600}
             height={750}
+            fetchPriority="high"
             className="rounded-lg shadow-lg"
+            loading="lazy"
           />
         </div>
-        <div className="md:w-2/3">
-          <h1 className="text-3xl font-bold mb-4">{movie.title}</h1>
-          <p className="text-gray-700 mb-4">{movie.overview}</p>
-          <div className="mb-4">
+        <div className="md:w-[60%]">
+          <h1 className="text-3xl font-bold mb-4 text-white">{movie.title}</h1>
+          <p className=" mb-4 text-white">{movie.overview}</p>
+          <div className="mb-4 text-white">
             <strong>Genres:</strong>{" "}
             {movie.genres
               .map((genre: { name: string }) => genre.name)
               .join(", ")}
           </div>
-          <div className="mb-4">
+          <div className="mb-4 text-white">
             <strong>Release Date:</strong>{" "}
             {new Date(movie.release_date).toLocaleDateString()}
           </div>
-          <div>
-            <h2 className="text-2xl font-bold mb-2">Cast</h2>
-            <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {credits.cast
-                .slice(0, 8)
-                .map(
-                  (actor: {
-                    id: string;
-                    name: string;
-                    profile_path: string;
-                    character: string;
-                  }) => (
-                    <li key={actor.id} className="text-center">
-                      <Image
-                        src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
-                        alt={actor.name}
-                        width={100}
-                        height={150}
-                        quality={70}
-                        className="rounded-lg mx-auto mb-2"
-                        priority
-                      />
-                      <p className="font-semibold">{actor.name}</p>
-                      <p className="text-sm text-gray-600">{actor.character}</p>
-                    </li>
-                  )
-                )}
+          <div className="">
+            <h2 className="text-2xl font-bold mb-2 text-white">Cast</h2>
+            <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-4 gap-4">
+              {credits.cast.slice(0, 8).map((actor: TActor) => (
+                <CastCard actor={actor} key={actor.id} />
+              ))}
             </ul>
           </div>
+        </div>
+      </div>
+
+      {/* Recommendations List */}
+      <div className="py-10 2xl:py-20">
+        <SectionTitle headingText="Recommendations 🎥" />
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-5 sm:gap-4">
+          {recommendations?.results?.map((movie: MovieProps) => (
+            <MovieCard movie={movie} key={movie.id} />
+          ))}
         </div>
       </div>
     </div>

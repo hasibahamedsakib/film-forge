@@ -14,3 +14,10 @@ export interface MovieProps {
 export interface TMoviePageData {
   pages: Array<{ results: MovieProps[] }>;
 }
+
+export interface TActor {
+  id: number;
+  name: string;
+  profile_path: string;
+  character: string;
+}

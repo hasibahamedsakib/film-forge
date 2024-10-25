@@ -18,10 +18,11 @@ const SearchPage = () => {
     queryKey: ["search", query],
     queryFn: () => searchMovie(query),
   });
+  const results = data?.results;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <section className="bg-secondary bg-banner_bg relative bg-left-top bg-no-repeat p-5 sm:p-10 lg:p-14 xl:p-18 2xl:px-[120px]">
+    <section className="bg-secondary bg-banner_bg relative bg-left-top bg-no-repeat px-2 py-5 sm:p-10 lg:p-14 xl:p-20  w-full mx-auto">
       <div className="">
         <SectionTitle headingText="Search Results 🔍" />
         {isLoading && (
@@ -30,12 +31,12 @@ const SearchPage = () => {
           </div>
         )}
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-5 sm:gap-4">
-          {data?.results.length === 0 ? (
+          {results?.length === 0 ? (
             <div className="text-center text-2xl font-bold text-red-500">
-              Opps... No results found
+              Opps... No movies found at this keyword
             </div>
           ) : (
-            data?.results?.map((movie: MovieProps) => (
+            results?.map((movie: MovieProps) => (
               <MovieCard movie={movie} key={movie.id} />
             ))
           )}

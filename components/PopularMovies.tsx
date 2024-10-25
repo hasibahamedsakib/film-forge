@@ -11,17 +11,11 @@ import Loader from "./Loader";
 const PopularMovies = () => {
   const { ref, inView } = useInView();
   // get popular movies
-  const {
-    data,
-    isLoading,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useInfiniteQueryHook(
-    ["popularMovies"],
-    popularMovies
-  ) as unknown as UseInfiniteQueryResult<TMoviePageData, Error>;
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteQueryHook(
+      ["popularMovies"],
+      popularMovies
+    ) as unknown as UseInfiniteQueryResult<TMoviePageData, Error>;
 
   useEffect(() => {
     if (inView && hasNextPage) {
