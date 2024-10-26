@@ -8,6 +8,7 @@ import MovieCard from "@/components/MovieCard";
 import { MovieProps } from "@/types/type";
 import Loader from "@/components/Loader";
 import PopularMovies from "@/components/PopularMovies";
+import { Container } from "@/components/movies/Container";
 
 const SearchPage = () => {
   const searchParams = useSearchParams();
@@ -22,27 +23,29 @@ const SearchPage = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <section className="bg-secondary bg-banner_bg relative bg-left-top bg-no-repeat px-2 py-5 sm:p-10 lg:p-14 xl:p-20  w-full mx-auto">
-      <div className="">
-        <SectionTitle headingText="Search Results 🔍" />
-        {isLoading && (
-          <div className="flex justify-center items-start ">
-            <Loader />
-          </div>
-        )}
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-5 sm:gap-4">
-          {results?.length === 0 ? (
-            <div className="text-center text-2xl font-bold text-red-500">
-              Opps... No movies found at this keyword
+    <section className=" bg-secondary bg-banner_bg relative bg-left-top bg-no-repeat ">
+      <Container>
+        <div className="pt-10 3xl:pt-14">
+          <SectionTitle headingText="Search Results 🔍" />
+          {isLoading && (
+            <div className="flex justify-center items-start ">
+              <Loader />
             </div>
-          ) : (
-            results?.map((movie: MovieProps) => (
-              <MovieCard movie={movie} key={movie.id} />
-            ))
           )}
+          <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-6 sm:gap-4  md:gap-5 2xl:gap-7">
+            {results?.length === 0 ? (
+              <div className="text-center text-2xl font-bold text-red-500">
+                Opps... No movies found at this keyword
+              </div>
+            ) : (
+              results?.map((movie: MovieProps) => (
+                <MovieCard movie={movie} key={movie.id} />
+              ))
+            )}
+          </div>
         </div>
-      </div>
-      <PopularMovies />
+        <PopularMovies />
+      </Container>
     </section>
   );
 };

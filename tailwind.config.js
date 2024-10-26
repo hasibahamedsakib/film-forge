@@ -21,6 +21,9 @@ module.exports = {
         circle_bg: "url('/image_circle_shape.png')",
         project_bg: "url('/project-bg.png')",
       },
+      screens: {
+        "3xl": "1800px",
+      },
     },
   },
   plugins: [],

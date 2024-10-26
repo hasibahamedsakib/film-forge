@@ -3,7 +3,7 @@ import { TActor } from "@/types/type";
 
 const CastCard = ({ actor }: { actor: TActor }) => {
   return (
-    <div className="group relative w-36 sm:w-[250px] h-52 sm:h-[320px] overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl">
+    <div className="group relative w-36 sm:w-[250px] md:w-[200px] xl:w-[220px] 2xl:md:w-[200px] 3xl:w-[250px] h-52 sm:h-[320px] overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl">
       <div className="relative h-full">
         <Image
           src={
@@ -12,11 +12,11 @@ const CastCard = ({ actor }: { actor: TActor }) => {
               : "/default-image.png"
           }
           width={300}
-          height={300}
+          height={400}
           alt={actor.name}
           fetchPriority="high"
           loading="lazy"
-          className="transition-all duration-300 group-hover:scale-110 object-fill"
+          className="transition-all duration-300 group-hover:scale-110 object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-indigo-900 via-indigo-500 to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-300" />
       </div>

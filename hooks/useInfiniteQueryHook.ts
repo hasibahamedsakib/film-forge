@@ -24,7 +24,7 @@ export const useInfiniteQueryHook = <T>(
     getNextPageParam: (lastPage) => {
       return lastPage.page < lastPage.total_pages
         ? lastPage.page + 1
-        : undefined;
+        : lastPage.page;
     },
     ...options,
   });

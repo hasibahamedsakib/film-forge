@@ -1,5 +1,5 @@
 "use client";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -49,23 +49,25 @@ const NavBar = () => {
       name: "About Us",
     },
     {
-      path: "/service",
-      name: "Service",
+      path: "/watchlist",
+      name: "Watchlist",
     },
     {
       path: "/blog",
       name: "Blog",
     },
   ];
-
-  //! handle search using react hook form
+  type FormData = {
+    search: string;
+  };
+  // handle search using react hook form
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormData>();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: FormData) => {
     if (data.search && data.search.trim()) {
       router.push(`/search?query=${encodeURIComponent(data.search.trim())}`);
     }
@@ -82,12 +84,14 @@ const NavBar = () => {
           <div className="scale-100 cursor-pointer rounded-2xl px-3 py-2 text-xl  text-red-500 font-bold  transition-all duration-200 hover:scale-110">
             <div>
               <Link href="/">
-                <span className="text-3xl font-serif text-white">Film</span>
+                <span className="text-xl sm:text-3xl font-serif text-white">
+                  Film
+                </span>
                 Forge
               </Link>
             </div>
           </div>
-          <ul className="hidden items-center justify-between gap-10 md:flex">
+          <ul className="hidden items-center justify-between gap-5 lg:gap-10 md:flex">
             {navItems?.map((item: TNavItems, index: number) => {
               return (
                 <Link href={item.path} key={index}>
@@ -102,17 +106,21 @@ const NavBar = () => {
           {/* search bar */}
           <div className="relative w-max rounded-lg">
             <form
-              // onSubmit={handleSearch}
               onSubmit={handleSubmit(onSubmit)}
               className=" rounded-lg border border-sky-600 bg-transparent px-4 py-2 text-white focus:outline-none 2xl:w-[300px] text-base flex items-center"
             >
               <input
-                className=" peer focus:outline-none bg-transparent  2xl:w-[300px] text-base"
+                className="peer focus:outline-none bg-transparent w-full 2xl:w-[300px] text-base"
                 type="text"
                 placeholder=""
-                id="navigate_ui_input_33"
-                // onChange={(e) => setSearchQuery(e.target.value)}
-                {...register("search", { required: true, minLength: 3 })}
+                id="searchBox"
+                {...register("search", {
+                  required: "This field is required",
+                  minLength: {
+                    value: 3,
+                    message: "Enter at least 3 characters",
+                  },
+                })}
               />
               <label
                 className={`absolute -top-2 left-2 rounded-md ${
@@ -120,15 +128,13 @@ const NavBar = () => {
                     ? "bg-red-500 peer-focus:bg-red-600"
                     : "bg-sky-800 peer-focus:bg-sky-600"
                 } px-2 text-xs text-sky-100 duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-sm peer-placeholder-shown:text-zinc-400 peer-focus:-top-2  peer-focus:text-xs peer-focus:text-sky-100 p-[2px] `}
-                htmlFor="navigate_ui_input_33"
+                htmlFor="searchBox"
               >
-                {errors.search && (
-                  <span className="text-red-100">This field is required</span>
+                {errors.search ? (
+                  <span className="text-red-100">{errors.search.message}</span>
+                ) : (
+                  "Search Movies..."
                 )}
-                {errors.search && (
-                  <span className="text-red-100">Minimum length is 3</span>
-                )}
-                {!errors.search && "Search Movies..."}
               </label>
               <button type="submit">🔍</button>
             </form>

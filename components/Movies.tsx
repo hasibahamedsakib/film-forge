@@ -33,9 +33,9 @@ const Movies = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="">
+    <div className="pt-10 3xl:pt-14">
       <SectionTitle headingText=" All Movies here 🎥" />
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-5 sm:gap-4 2">
+      <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-6 sm:gap-4 md:gap-5 2xl:gap-7">
         {isLoading && (
           <div className="flex w-full justify-center items-start h-screen">
             <Loader />
