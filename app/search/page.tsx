@@ -3,12 +3,12 @@ import React from "react";
 import { useSearchParams } from "next/navigation";
 import { searchMovie } from "@/utils/searchMovie";
 import { useQuery } from "@tanstack/react-query";
-import SectionTitle from "@/Components/SectionTitle";
-import MovieCard from "@/Components/Movies/MovieCard";
+import SectionTitle from "@/app/Components/SectionTitle";
+import MovieCard from "@/app/Components/Movies/MovieCard";
 import { MovieProps } from "@/types/type";
-import Loader from "@/Components/Loader/Loader";
-import PopularMovies from "@/Components/Movies/PopularMovies";
-import { Container } from "@/Components/Container";
+import Loader from "@/app/Components/Loader/Loader";
+import PopularMovies from "@/app/Components/Movies/PopularMovies";
+import { Container } from "@/app/Components/Container";
 
 const SearchPage = () => {
   const searchParams = useSearchParams();
