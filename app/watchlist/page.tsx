@@ -19,7 +19,7 @@ async function handleRemoveFromWatchlist(id: number) {
 
 export default async function WatchlistPage() {
   const watchlist = await getWatchlist();
-  console.log(watchlist);
+
   return (
     <div className="bg-secondary bg-banner_bg relative bg-left-top bg-no-repeat ">
       <Container>
@@ -56,7 +56,7 @@ export default async function WatchlistPage() {
                 </div>
               </div>
               <div className="p-4">
-                <h2 className="text-xl font-bold text-white mb-2 truncate">
+                <h2 className="text-lg font-semibold text-white mb-2 truncate">
                   {movie.title}
                 </h2>
                 <form action={handleRemoveFromWatchlist.bind(null, movie.id)}>
