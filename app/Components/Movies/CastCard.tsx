@@ -21,7 +21,7 @@ const CastCard = ({ actor }: { actor: TActor }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-indigo-900 via-indigo-500 to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-300" />
       </div>
       <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full transition-all duration-300 group-hover:translate-y-0">
-        <h5 className="text-xl font-bold truncate mb-1 text-yellow-300">
+        <h5 className="text-lg md:text-xl font-bold truncate mb-1 text-yellow-300">
           {actor.name}
         </h5>
         <p className="text-sm text-white font-semibold truncate">

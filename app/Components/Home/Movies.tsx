@@ -7,8 +7,9 @@ import SectionTitle from "../SectionTitle";
 import Loader from "../Loader/Loader";
 import { useInfiniteQueryHook } from "@/hooks/useInfiniteQueryHook";
 import { UseInfiniteQueryResult } from "@tanstack/react-query";
-import { getPopularMovies } from "@/utils/popularMovies";
+
 import MovieCard from "../Movies/MovieCard";
+import { fetchMovies } from "@/utils/fetchMovie";
 
 const Movies = () => {
   const { ref, inView } = useInView();
@@ -22,7 +23,7 @@ const Movies = () => {
     isFetchingNextPage,
   } = useInfiniteQueryHook(
     ["allMovies"],
-    getPopularMovies
+    fetchMovies
   ) as unknown as UseInfiniteQueryResult<TMoviePageData, Error>;
 
   useEffect(() => {

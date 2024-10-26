@@ -7,7 +7,3 @@ export const fetchMovies = async (id: number) => {
   );
   return res.json();
 };
-export const getWatchlist = async () => {
-  const res = await fetch(`/api/watchlist`);
-  return res.json();
-};

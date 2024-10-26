@@ -1,29 +1,46 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
 import { MovieProps } from "@/types/type";
+import { getMovieDetails } from "@/utils/getMovieDetails";
 import { cookies } from "next/headers";
 
-export async function addToWatchlist(movie: MovieProps) {
-  const currentWatchlist = await getWatchlist();
-  if (!currentWatchlist.find((item) => item.id === movie.id)) {
-    currentWatchlist.push(movie);
+const WATCHLIST_COOKIE = "watchlist";
+
+export async function addToWatchlist(movieId: number) {
+  const watchlistCookie = cookies().get(WATCHLIST_COOKIE)?.value;
+  const watchlist = watchlistCookie ? JSON.parse(watchlistCookie) : [];
+
+  if (!watchlist.includes(movieId)) {
+    watchlist.push(movieId);
+    cookies().set(WATCHLIST_COOKIE, JSON.stringify(watchlist), {
+      httpOnly: true,
+    });
   }
-  cookies().set("watchlist", JSON.stringify(currentWatchlist));
 }
 
-export async function removeFromWatchlist(movieId: string) {
-  const currentWatchlist = await getWatchlist();
-  const updatedWatchlist = currentWatchlist.filter(
-    (item) => item.id !== movieId
-  );
-  cookies().set("watchlist", JSON.stringify(updatedWatchlist));
+export async function removeFromWatchlist(movieId: number) {
+  const watchlistCookie = cookies().get(WATCHLIST_COOKIE)?.value;
+  if (watchlistCookie) {
+    const watchlist = JSON.parse(watchlistCookie);
+    const updatedWatchlist = watchlist.filter((id: number) => id !== movieId);
+    cookies().set(WATCHLIST_COOKIE, JSON.stringify(updatedWatchlist), {
+      httpOnly: true,
+    });
+  }
 }
 
-export async function getWatchlist(): Promise<Record<string, any>[]> {
-  const savedWatchlist = cookies().get("watchlist")?.value;
-  if (savedWatchlist) {
-    return JSON.parse(savedWatchlist);
+export async function getWatchlist() {
+  const watchlistCookie = cookies().get(WATCHLIST_COOKIE)?.value;
+  if (watchlistCookie) {
+    const watchlistIds = JSON.parse(watchlistCookie);
+    const movies = await Promise.all(
+      watchlistIds.map((id: number) => getMovieDetails(id.toString()))
+    );
+    return movies;
   }
   return [];
+}
+export async function isInWatchlist(movieId: number): Promise<boolean> {
+  const watchlist = await getWatchlist();
+  return watchlist.some((movie: MovieProps) => movie.id === movieId);
 }
