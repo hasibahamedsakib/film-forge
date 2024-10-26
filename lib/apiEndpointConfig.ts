@@ -1,4 +1,4 @@
-const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+const apiKey = process.env.TMDB_API_KEY;
 // API Endpoints
 export const apiEndpoint = {
   popularMovies: `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`,
