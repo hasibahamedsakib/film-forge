@@ -3,11 +3,12 @@ import { MovieProps, TMoviePageData } from "@/types/type";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import SectionTitle from "../SectionTitle";
-import MovieCard from "../Movies/MovieCard";
+
 import Loader from "../Loader/Loader";
 import { useInfiniteQueryHook } from "@/hooks/useInfiniteQueryHook";
 import { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { getPopularMovies } from "@/utils/popularMovies";
+import MovieCard from "../Movies/MovieCard";
 
 const Movies = () => {
   const { ref, inView } = useInView();
