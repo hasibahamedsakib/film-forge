@@ -1,5 +1,5 @@
 export const getPopularMovies = async () => {
-  const apiKey = process.env.TMDB_API_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
   if (!apiKey) {
     throw new Error("TMDB_API_KEY is not defined in environment variables");
   }
