@@ -33,7 +33,9 @@ const MovieCard = ({ movie }: { movie: MovieProps }) => {
               ? movie.title.substring(0, 22) + "..."
               : movie.title}
           </h2>
-          <span className="text-primary font-bold">{movie.vote_average}</span>
+          <span className="text-primary font-bold">
+            {movie.vote_average.toFixed(1)}⭐
+          </span>
         </div>
       </div>
       {/* Animated details button */}

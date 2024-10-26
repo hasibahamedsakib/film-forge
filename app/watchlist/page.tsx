@@ -44,7 +44,7 @@ export default async function WatchlistPage() {
                   alt={movie.title || ""}
                   width={350}
                   height={320}
-                  className="w-full h-[320px]"
+                  className="w-full h-[320px] object-cover"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <Link
