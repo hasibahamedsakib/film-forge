@@ -1,7 +1,7 @@
 import AddToWatchlistButton from "@/components/AddToWatchlistButton";
-import MovieCard from "@/components/MovieCard";
-import CastCard from "@/components/movies/CastCard";
-import { Container } from "@/components/movies/Container";
+import MovieCard from "@/components/Movies/MovieCard";
+import CastCard from "@/components/Movies/CastCard";
+import { Container } from "@/components/Container";
 import SectionTitle from "@/components/SectionTitle";
 import { MovieProps, TActor } from "@/types/type";
 import { getMovieCredits } from "@/utils/getMovieCredits";

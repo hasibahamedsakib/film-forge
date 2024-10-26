@@ -2,12 +2,12 @@
 import { MovieProps, TMoviePageData } from "@/types/type";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
-import { fetchMovies } from "@/utils/fetchMovie";
-import SectionTitle from "./SectionTitle";
-import MovieCard from "./MovieCard";
-import Loader from "./Loader";
+import SectionTitle from "../SectionTitle";
+import MovieCard from "../Movies/MovieCard";
+import Loader from "../Loader/Loader";
 import { useInfiniteQueryHook } from "@/hooks/useInfiniteQueryHook";
 import { UseInfiniteQueryResult } from "@tanstack/react-query";
+import { getPopularMovies } from "@/utils/popularMovies";
 
 const Movies = () => {
   const { ref, inView } = useInView();
@@ -21,7 +21,7 @@ const Movies = () => {
     isFetchingNextPage,
   } = useInfiniteQueryHook(
     ["allMovies"],
-    fetchMovies
+    getPopularMovies
   ) as unknown as UseInfiniteQueryResult<TMoviePageData, Error>;
 
   useEffect(() => {

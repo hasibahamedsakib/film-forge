@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 
 import ReactQueryProvider from "@/lib/reactQueryProvider";
-import NavBar from "@/components/Navbar";
+import NavBar from "@/components/Navbar/Navbar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

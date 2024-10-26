@@ -1,5 +1,5 @@
-import { Container } from "@/components/movies/Container";
-import Movies from "../components/Movies";
+import { Container } from "@/components/Container";
+import Movies from "../components/Home/Movies";
 
 const Main = () => {
   return (

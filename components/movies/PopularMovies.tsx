@@ -1,12 +1,12 @@
 import { useInfiniteQueryHook } from "@/hooks/useInfiniteQueryHook";
 import { getPopularMovies } from "@/utils/popularMovies";
-import SectionTitle from "./SectionTitle";
+import SectionTitle from "../SectionTitle";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import MovieCard from "./MovieCard";
 import { MovieProps, TMoviePageData } from "@/types/type";
 import { UseInfiniteQueryResult } from "@tanstack/react-query";
-import Loader from "./Loader";
+import Loader from "../Loader/Loader";
 
 const PopularMovies = () => {
   const { ref, inView } = useInView();

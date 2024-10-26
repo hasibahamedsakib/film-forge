@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const NavBar = () => {
   const router = useRouter();
@@ -83,8 +84,15 @@ const NavBar = () => {
         <div className="flex items-center justify-between text-white py-4">
           <div className="scale-100 cursor-pointer rounded-2xl px-3 py-2 text-xl  text-red-500 font-bold  transition-all duration-200 hover:scale-110">
             <div>
-              <Link href="/">
-                <span className="text-xl sm:text-3xl font-serif text-white">
+              <Link href="/" className="flex items-center gap-2 text-white">
+                <Image
+                  className="hidden sm:block"
+                  src="/logo-icon.png"
+                  alt="logo"
+                  width={40}
+                  height={40}
+                />
+                <span className="text-xl sm:text-3xl font-serif text-yellow-300">
                   Film
                 </span>
                 Forge

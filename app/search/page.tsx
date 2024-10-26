@@ -4,11 +4,11 @@ import { useSearchParams } from "next/navigation";
 import { searchMovie } from "@/utils/searchMovie";
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "@/components/SectionTitle";
-import MovieCard from "@/components/MovieCard";
+import MovieCard from "@/components/Movies/MovieCard";
 import { MovieProps } from "@/types/type";
-import Loader from "@/components/Loader";
-import PopularMovies from "@/components/PopularMovies";
-import { Container } from "@/components/movies/Container";
+import Loader from "@/components/Loader/Loader";
+import PopularMovies from "@/components/Movies/PopularMovies";
+import { Container } from "@/components/Container";
 
 const SearchPage = () => {
   const searchParams = useSearchParams();
