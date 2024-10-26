@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { searchMovie } from "@/utils/searchMovie";
 import { useQuery } from "@tanstack/react-query";
@@ -10,7 +10,7 @@ import Loader from "@/app/Components/Loader/Loader";
 import PopularMovies from "@/app/Components/Movies/PopularMovies";
 import { Container } from "@/app/Components/Container";
 
-const SearchPage = () => {
+const SearchContent = () => {
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || "";
 
@@ -47,6 +47,20 @@ const SearchPage = () => {
         <PopularMovies />
       </Container>
     </section>
+  );
+};
+
+const SearchPage = () => {
+  return (
+    <Suspense
+      fallback={
+        <div>
+          <Loader />
+        </div>
+      }
+    >
+      <SearchContent />
+    </Suspense>
   );
 };
 
